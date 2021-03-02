@@ -1,6 +1,0 @@
-digraph {
-	f1 -> f2 [label="(10,)"]
-	f1 -> f3 [label="(2,)"]
-	f3 -> f4 [label="(2,)"]
-	f1 -> f4 [label="(10,)"]
-}
