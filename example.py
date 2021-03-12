@@ -1,7 +1,6 @@
 from graph_trace import trace, render_trace
 
-
-y = 2
+y = 10
 
 @trace(label="f1")
 def f1(x):
