@@ -8,7 +8,7 @@ functions = []
 def trace(label: str):
     def my_decorator(func):
         def wrapped(*args, **kwargs):
-            actions.append((">>>",label, args, kwargs))  #(">>>",label, args, kwargs)
+            actions.append((">>>",label, args, kwargs))
             res = func(*args, **kwargs)
             functions.append(res)
             actions.append(("<<<",label))
