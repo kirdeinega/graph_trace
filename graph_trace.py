@@ -24,6 +24,7 @@ def trace(label: str):
             actions.append(action_properties)
             result = func(*args, **kwargs)
             action_properties.result = result
+            action_properties.status = '<<<'
             actions.append(action_properties)
             return result
         return wrapped
@@ -34,9 +35,10 @@ def render_trace():
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
         if actions[i].status == '>>>':
-            tree.edge(str(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}"), str(actions[i].label), str(f"args = {actions[i].args}"))
+            tree.edge(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
+            print(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
             open_close.append(actions[i])
-        if actions[i].status == '<<<':
+        elif actions[i].status == '<<<':
             if len(open_close) > 1:
                 del open_close[-1]
     tree.render('out/graph_trace.gv', view=True)
