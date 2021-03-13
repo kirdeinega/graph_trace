@@ -24,20 +24,19 @@ def trace(label: str):
             actions.append(action_properties)
             res = func(*args, **kwargs)
             action_properties.res = res
-            actions.append(("<<<",label))
+            actions.append(action_properties)
             return res
         return wrapped
     return my_decorator
-
 
 def render_trace():
     tree = Digraph()
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
-        if actions.status == '>>>':
-            tree.edge(str(open_close[-1][1]), str(actions[i][1]), str(actions[i][2]))
+        if actions[i].status == '>>>':
+            tree.edge(str(open_close[-1].label), str(actions[i].label), str(f"args = {actions[i].args}"))
             open_close.append(actions[i])
-        if actions[i][0] == '<<<':
+        if actions[i].status == '<<<':
             if len(open_close) > 1:
                 del open_close[-1]
     tree.render('out/graph_trace.gv', view=True)
