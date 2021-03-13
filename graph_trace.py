@@ -3,14 +3,27 @@ from typing import Any, Dict
 
 
 actions = []
-functions = []
+@dataclass
+class ActionProperties:
+    status: str
+    status_2: str
+    label: str
+    args: tuple
+    kwargs: Dict[str, Any]
+    result: Any = None
 
 def trace(label: str):
     def my_decorator(func):
         def wrapped(*args, **kwargs):
-            actions.append((">>>",label, args, kwargs))
+            action_properties = ActionProperties(
+                status = ">>>",
+                lable = lable,
+                args = args
+                kwargs = kwargs
+            )
+            actions.append(action_properties)
             res = func(*args, **kwargs)
-            functions.append(res)
+            action_properties.append(res=res)
             actions.append(("<<<",label))
             return res
         return wrapped
@@ -19,7 +32,6 @@ def trace(label: str):
 
 def render_trace():
     tree = Digraph()
-    actions.append(functions)
     print(functions)
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
