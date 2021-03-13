@@ -1,4 +1,5 @@
 from graphviz import Digraph
+from dataclasses import dataclass
 from typing import Any, Dict
 
 
@@ -6,7 +7,6 @@ actions = []
 @dataclass
 class ActionProperties:
     status: str
-    status_2: str
     label: str
     args: tuple
     kwargs: Dict[str, Any]
@@ -17,13 +17,13 @@ def trace(label: str):
         def wrapped(*args, **kwargs):
             action_properties = ActionProperties(
                 status = ">>>",
-                lable = lable,
-                args = args
+                label = label,
+                args = args,
                 kwargs = kwargs
             )
             actions.append(action_properties)
             res = func(*args, **kwargs)
-            action_properties.append(res=res)
+            action_properties.res = res
             actions.append(("<<<",label))
             return res
         return wrapped
@@ -32,10 +32,9 @@ def trace(label: str):
 
 def render_trace():
     tree = Digraph()
-    print(functions)
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
-        if actions[i][0] == '>>>':
+        if actions.status == '>>>':
             tree.edge(str(open_close[-1][1]), str(actions[i][1]), str(actions[i][2]))
             open_close.append(actions[i])
         if actions[i][0] == '<<<':
