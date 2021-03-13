@@ -22,10 +22,10 @@ def trace(label: str):
                 kwargs = kwargs
             )
             actions.append(action_properties)
-            res = func(*args, **kwargs)
-            action_properties.res = res
+            result = func(*args, **kwargs)
+            action_properties.result = result
             actions.append(action_properties)
-            return res
+            return result
         return wrapped
     return my_decorator
 
@@ -34,7 +34,7 @@ def render_trace():
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
         if actions[i].status == '>>>':
-            tree.edge(str(open_close[-1].label), str(actions[i].label), str(f"args = {actions[i].args}"))
+            tree.edge(str(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}"), str(actions[i].label), str(f"args = {actions[i].args}"))
             open_close.append(actions[i])
         if actions[i].status == '<<<':
             if len(open_close) > 1:
