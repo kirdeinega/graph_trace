@@ -33,11 +33,11 @@ def render_trace():
     tree = Digraph()
     open_close = [actions[0]]
     for i in range(1, len(actions) - 2):
-        if actions[i].status == '>>>':
+        if actions[i].label not in open_close:
             tree.edge(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
             print(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
             open_close.append(actions[i])
-        else:
+        elif actions[i].label in open_close:
             if len(open_close) > 1:
                 del open_close[-1]
     tree.render('out/graph_trace.gv', view=True)
