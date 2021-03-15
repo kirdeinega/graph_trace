@@ -4,6 +4,7 @@ from typing import Any, Dict
 import copy
 
 actions = []
+
 @dataclass
 class ActionProperties:
     status: str
