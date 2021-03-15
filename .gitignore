@@ -5,3 +5,5 @@ venv/
 *.pdf
 .vscode/
 out/
+app.py
+tips.py
