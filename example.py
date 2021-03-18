@@ -1,19 +1,19 @@
 from graph_trace import trace, render_trace
 
-y = 'Hello World'
-x = 1
+y = 5
+x = 10
 
 @trace(label="f1")
 def f1(x):
-    return f2(x) + f3(y) + f4(y)
+    return f2(x) + f3(x) + f4(y)
 
 @trace(label="f2")
 def f2(x):
-    return f3(y) + str(x)
+    return y + x
 
 @trace(label="f3")
 def f3(x):
-    return str(5 * x)
+    return 5 * x
 
 @trace(label="f4")
 def f4(y):
