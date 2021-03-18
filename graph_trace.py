@@ -14,7 +14,7 @@ class ActionProperties:
     args: tuple
     kwargs: Dict[str, Any]
     result: Any = None
-    result_time: Any = None
+    time: Any = None
 
 def trace(label: str):
     def my_decorator(func):
@@ -32,8 +32,8 @@ def trace(label: str):
             action_properties.result = result
             action_properties_2.status = "<<<"
             actions.append(action_properties_2)
-            time = timeit.default_timer()-a
-            action_properties.result_time = time
+            time = round(timeit.default_timer()-a, 15)
+            action_properties.time = time
             return result, time
         return wrapped
     return my_decorator
@@ -46,7 +46,7 @@ def render_trace():
     for i in range(1, len(actions) - 2):
         if actions[i].status == ">>>":
             wer = True
-            tree.edge(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", f"label = {actions[i].label}, resalt = {actions[i].result}", f"args = {actions[i].args}, kwargs = {actions[i].kwargs}")
+            tree.edge(f"label = {open_close[-1].label}, /n resalt = {open_close[-1].result[0]}, /n time = {open_close[-1].time}", f"label = {actions[i].label}, /n resalt = {actions[i].result}, /n time = {actions[i].time}", f"args = {actions[i].args}, /n kwargs = {actions[i].kwargs}")
             #print(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
             open_close.append(actions[i])
         elif actions[i].status == "<<<":
