@@ -46,9 +46,9 @@ def render_trace():
     for i in range(1, len(actions) - 2):
         if actions[i].status == ">>>":
             wer = True
-            tree.edge(f"label = {open_close[-1].label}, \n result = {open_close[-1].result[0]}, \n time = {open_close[-1].time}", 
-            f"label = {actions[i].label}, \n result = {actions[i].result}, \n time = {actions[i].time}", 
-            f"args = {actions[i].args}, \n kwargs = {actions[i].kwargs}"
+            tree.edge(f"label = {open_close[-1].label} \n result = {open_close[-1].result} \n time = {open_close[-1].time}", 
+            f"label = {actions[i].label} \n result = {actions[i].result} \n time = {actions[i].time}", 
+            f"args = {actions[i].args} \n kwargs = {actions[i].kwargs}"
             )
             #print(f"label = {open_close[-1].label}, resalt = {open_close[-1].result}", actions[i].label, f"args = {actions[i].args}")
             open_close.append(actions[i])
