@@ -32,9 +32,9 @@ def trace(label: str):
             action_properties.result = result
             action_properties_2.status = "<<<"
             actions.append(action_properties_2)
-            time = round(timeit.default_timer()-a, 15)
+            time = timeit.default_timer()-a
             action_properties.time = time
-            return result, time
+            return result
         return wrapped
     return my_decorator
 
