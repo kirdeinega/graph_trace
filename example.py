@@ -5,7 +5,10 @@ x = 10
 
 @trace(label="f1")
 def f1(x):
-    return f2(x) + f3(x) + f4(y)
+    q = 0
+    for i in range(99000000):
+        q += i
+    return f2(x) + f3(x) + f4(y) + q
 
 @trace(label="f2")
 def f2(x):
