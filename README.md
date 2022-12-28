@@ -1,4 +1,7 @@
 # graph_trace
+
+Would you like to see documentation in English? [CLick](https://github.com/Sanyalearn/graph_trace/blob/main/README.md)
+
 Graph trace — визуализатор функций на Python. Данная программа визуализирует работу функций в Вашей программе на питон. 
 
 ***Как работать с данной библиотекой***
